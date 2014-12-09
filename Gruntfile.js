@@ -383,6 +383,21 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
+  grunt.registerTask('locales', 'Combine locales and inject them', function() {
+    var fs = require('fs');
+    grunt.log.writeln('Injecting locales');
+    var data = {};
+    var langDir = __dirname + '/app/assets/locales';
+    fs.readdirSync(langDir).forEach(function(file) {
+      if(file.indexOf('.json')>0){
+        var lang = file.substr(0, file.indexOf('.'));
+        data[lang] = JSON.parse(fs.readFileSync(langDir + '/' + lang + '.json'));
+      }
+    });
+    fs.writeFileSync(__dirname + '/dist/scripts/locales.js', 'var localeData = ' + JSON.stringify(data) + ';');
+    return true;
+  });
+
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
@@ -397,6 +412,7 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
+    'locales',
     'htmlmin'
   ]);
 
