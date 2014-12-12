@@ -394,7 +394,7 @@ module.exports = function (grunt) {
         data[lang] = JSON.parse(fs.readFileSync(langDir + '/' + lang + '.json'));
       }
     });
-    fs.writeFileSync(__dirname + '/dist/scripts/locales.js', 'var localeData = ' + JSON.stringify(data) + ';');
+    fs.writeFileSync(__dirname + '/app/scripts/locales.js', 'var LocalesData = ' + JSON.stringify(data) + ';');
     return true;
   });
 

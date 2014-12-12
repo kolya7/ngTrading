@@ -33,6 +33,6 @@ angular
       });
 
     // Load locales
-    $translateProvider.translations('en', {});
+    $translateProvider.translations('en', LocalesData.en);
     $translateProvider.preferredLanguage('en');
   });
